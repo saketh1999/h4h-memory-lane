@@ -36,27 +36,46 @@ export default function MemoriesPage() {
     { id: 29, image: 'https://picsum.photos/id/85/200/300', height: 200 },
     { id: 30, image: 'https://picsum.photos/id/103/200/300', height: 400 }
   ];
+
+  // Split data into three parts
+  const recentMemories = data.slice(0, 10);
+  const pastMemories = data.slice(10, 20);
+  const oldMemories = data.slice(20, 30);
+
   return (
     <div className="min-h-screen bg-[#F8F4EB] px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <Tabs defaultValue="feed" className="w-full space-y-8">
+        <Tabs defaultValue="feed" className=" w-full space-y-8 mt-2">
           <TabsList className="w-full sm:w-auto bg-white/50 backdrop-blur-sm">
             <TabsTrigger 
               value="feed"
-              className="data-[state=active]:bg-white data-[state=active]:shadow-sm"
+              className="text-lg data-[state=active]:bg-white data-[state=active]:shadow-sm "
             >
               Memory Feed
             </TabsTrigger>
             <TabsTrigger 
               value="chat"
-              className="data-[state=active]:bg-white data-[state=active]:shadow-sm"
+              className="text-lg data-[state=active]:bg-white data-[state=active]:shadow-sm"
             >
               Chat
             </TabsTrigger>
           </TabsList>
           
-          <TabsContent value="feed" className="mt-6">
-            <Masonry data={data} />
+          <TabsContent value="feed" className="mt-6 space-y-12">
+            <div>
+              <h2 className="text-2xl font-semibold mb-6">Recent Memories</h2>
+              <Masonry data={recentMemories} />
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-semibold mb-6">Past Memories</h2>
+              <Masonry data={pastMemories} />
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-semibold mb-6">Old Memories</h2>
+              <Masonry data={oldMemories} />
+            </div>
           </TabsContent>
           
           <TabsContent value="chat" className="mt-6">
