@@ -33,12 +33,11 @@ export default function LandingPage() {
              
               <CardTitle className="text-4xl font-bold">
               <TextPressure weight={false} text={'Memory Lane'}></TextPressure>
-
                 </CardTitle>
-              <CardDescription className="text-xl">Your personal journey through cherished memories</CardDescription>
+             
             </CardHeader>
             <CardContent>
-              <p className="text-lg">
+              <p className="text-l">
                 Memory Lane is designed to help you reconnect with your past and stay connected with your loved ones.
               </p>
             </CardContent>
@@ -50,19 +49,7 @@ export default function LandingPage() {
           </Card>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="bg-white bg-opacity-25 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle>Who Am I</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p>Rediscover yourself and important details about your life.</p>
-              </CardContent>
-              <CardFooter>
-                <Link href="/who-am-i">
-                  <Button className="bg-[#A895BA] hover:bg-[#8F7DA3]">Learn More</Button>
-                </Link>
-              </CardFooter>
-            </Card>
+            
 
             <Card className="bg-white bg-opacity-25 backdrop-blur-sm">
               <CardHeader>
@@ -83,11 +70,25 @@ export default function LandingPage() {
                 <CardTitle>Contacts</CardTitle>
               </CardHeader>
               <CardContent>
-                <p>Stay connected with your loved ones and caregivers.</p>
+                <p>Stay connected with your loved ones, friends and caregivers.</p>
               </CardContent>
               <CardFooter>
                 <Link href="/contacts">
                   <Button className="bg-[#A895BA] hover:bg-[#8F7DA3]">See Contacts</Button>
+                </Link>
+              </CardFooter>
+            </Card>
+
+            <Card className="bg-white bg-opacity-25 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle>Who Am I</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p>Rediscover yourself and important details about your life.</p>
+              </CardContent>
+              <CardFooter>
+                <Link href="/who-am-i">
+                  <Button className="bg-[#A895BA] hover:bg-[#8F7DA3]">Learn More</Button>
                 </Link>
               </CardFooter>
             </Card>
