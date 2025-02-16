@@ -1,9 +1,11 @@
+
 "use client"
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-
+import { PiSparkle } from "react-icons/pi";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 interface Message {
   role: 'user' | 'assistant';
   content: string;
@@ -53,13 +55,30 @@ export default function MemoryChat() {
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`mb-4 p-3 rounded-lg ${
+            className={`mb-4 p-3 rounded-lg flex items-start gap-2 ${
               message.role === 'user' 
                 ? 'bg-blue-100 ml-auto max-w-[80%]' 
                 : 'bg-gray-100 mr-auto max-w-[80%]'
             }`}
           >
-            {message.content}
+            {message.role === 'assistant' ? (
+              <div className='flex items-center gap-2'>
+              <PiSparkle className="w-5 h-5 mt-1 text-purple-500" />
+              <div>{message.content}</div>
+              </div>
+            ) : (
+              <div className='flex gap-2 '>
+                <div>{message.content}</div>
+              <Avatar className="w-8 h-8 ">
+                <AvatarImage src='/jane_doe.jpg' alt="JD" />
+                <AvatarFallback className="text-xs">
+                  JD
+                </AvatarFallback>
+              </Avatar>
+              
+              </div>
+            )}
+            
           </div>
         ))}
       </div>
@@ -77,4 +96,3 @@ export default function MemoryChat() {
     </div>
   );
 }
-
