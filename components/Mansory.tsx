@@ -7,6 +7,7 @@ interface MasonryItem {
   id: string | number;
   height: number;
   image: string;
+  description:string;
 }
 
 interface GridItem extends MasonryItem {
@@ -156,7 +157,7 @@ function Masonry({ data }: MasonryProps) {
             <div className="flex-1">
               <h2 className="text-2xl font-bold mb-4">Image Details</h2>
               <p className="text-gray-600">
-                ID: {selectedItem?.id}
+                About: {selectedItem?.description}
               </p>
             </div>
           </div>

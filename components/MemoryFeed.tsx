@@ -12,7 +12,7 @@ interface Memory {
   date: string
 }
 
-export default function MemoryFeed() {
+export default function Memories() {
   const [memories, setMemories] = useState<Memory[]>([])
   const [loading, setLoading] = useState(true)
 
