@@ -2,7 +2,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Phone } from "lucide-react"
-
 interface Contact {
   id: string
   name: string
@@ -11,24 +10,23 @@ interface Contact {
   email: string
   profilePicture: string
 }
-
 export default function ContactsPage() {
   const contacts: Contact[] = [
     {
       id: "1",
-      name: "Jane Doe",
+      name: "Mary Doe",
       relation: "Daughter",
       phone: "555-1234",
-      email: "jane@example.com",
-      profilePicture: "https://i.pravatar.cc/150?img=1",
+      email: "mary@example.com",
+      profilePicture: "/images/Mary.png"
     },
     {
       id: "2",
-      name: "John Smith",
-      relation: "Son",
+      name: "John Doe",
+      relation: "Husband",
       phone: "555-5678",
       email: "john@example.com",
-      profilePicture: "https://i.pravatar.cc/150?img=2",
+      profilePicture: "/images/John.png",
     },
     {
       id: "3",
@@ -36,7 +34,7 @@ export default function ContactsPage() {
       relation: "Doctor",
       phone: "555-9876",
       email: "dr.brown@example.com",
-      profilePicture: "https://i.pravatar.cc/150?img=3",
+      profilePicture: "/images/DrBrown.jpg",
     },
     {
       id: "4",
@@ -44,7 +42,7 @@ export default function ContactsPage() {
       relation: "Caregiver",
       phone: "555-4321",
       email: "sarah@example.com",
-      profilePicture: "https://i.pravatar.cc/150?img=4",
+      profilePicture: "/images/Caregiver.png",
     },
     {
       id: "5",
@@ -52,7 +50,7 @@ export default function ContactsPage() {
       relation: "Physical Therapist",
       phone: "555-8765",
       email: "michael@example.com",
-      profilePicture: "https://i.pravatar.cc/150?img=5",
+      profilePicture: "/images/Nurse.jpg",
     },
     {
       id: "6",
@@ -60,13 +58,11 @@ export default function ContactsPage() {
       relation: "Nurse",
       phone: "555-2468",
       email: "lisa@example.com",
-      profilePicture: "https://i.pravatar.cc/150?img=6",
+      profilePicture: "/images/Nurse2.jpg",
     }
   ]
-
   return (
     <div className="container mx-auto py-8 px-4 bg-[#F8F4EB] min-h-screen">
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {contacts.map((contact) => (
           <Card key={contact.id} className="hover:shadow-lg transition-shadow duration-300">
@@ -81,18 +77,19 @@ export default function ContactsPage() {
                 </AvatarFallback>
               </Avatar>
               <div>
-                <CardTitle className="text-xl">{contact.name}</CardTitle>
+                <CardTitle className="text-xl text-primary">{contact.name}</CardTitle>
                 <p className="text-sm text-muted-foreground font-medium">{contact.relation}</p>
               </div>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                <p className="flex items-center text-gray-700">
+              <CardTitle className="text-xl font-semibold text-gray-800">Contact Information</CardTitle>
+                <p className="text-primary foreground flex items-center text-800">
                   <Phone className="mr-2 h-4 w-4 text-primary" />
                   {contact.phone}
                 </p>
-                <p className="flex items-center text-gray-700">
-                  <svg className="mr-2 h-4 w-4 text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <p className="text-primary foreground flex items-center text- grey -800">
+                  <svg className="mr-2 h-4 w-4 text- xl text-primary foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                     <polyline points="22,6 12,13 2,6" />
                   </svg>
@@ -109,4 +106,3 @@ export default function ContactsPage() {
     </div>
   )
 }
-
