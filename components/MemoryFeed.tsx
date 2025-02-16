@@ -10,6 +10,7 @@ interface Memory {
   title: string
   description: string
   date: string
+  tag: string
 }
 
 export default function Memories() {
@@ -25,18 +26,21 @@ export default function Memories() {
         title: "Family Picnic",
         description: "We had a wonderful picnic in Central Park last summer.",
         date: "2022-07-15",
+        tag: "family",
       },
       {
         id: "2",
         title: "Wedding Anniversary",
         description: "Celebrated our 50th wedding anniversary with close friends and family.",
         date: "2023-03-22",
+        tag: "family",
       },
       {
         id: "3",
         title: "Grandchild's Birth",
         description: "Welcoming our first grandchild, little Emma, into the world.",
         date: "2023-01-10",
+        tag: "family",
       },
     ]
 
