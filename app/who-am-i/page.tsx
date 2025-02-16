@@ -1,20 +1,75 @@
+"use client"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import CircularGallery from '@/components/CircularGallery'
 import { IoCloudyNight } from "react-icons/io5";
+import { db } from '@/app/api/memories/firebase'
+import { doc, setDoc, getDoc, onSnapshot } from "firebase/firestore"
+import { useState,useEffect } from "react"
+import { FirebaseError } from "firebase/app"
+import { Loader2 } from "lucide-react";
+
+interface PatientDetails {
+  id: string
+  name: string
+  age: number
+  diagnosis: string
+  emergencyContact:string 
+  emergencyPhone: string
+  medications: string[]
+  allergies: string[]
+  profilePicture: string
+  createdAt: string
+  about: string
+}
+
 export default function WhoAmIPage() {
-  // TODO: Fetch patient details from API
-  const patientDetails = {
-    name: "Jane Doe",
-    age: 72,
-    diagnosis: "Early-stage Alzheimer's",
-    emergencyContact: "Jane Doe (Daughter)",
-    emergencyPhone: "555-1234",
-    medications: ["Donepezil", "Memantine"],
-    allergies: ["Penicillin"],
-    profilePicture: "/jane_doe.jpg",
-    about: "I enjoy gardening, reading mystery novels, and spending time with my grandchildren. I've been living in Boston for over 40 years."
+  const [patientData, setPatientData] = useState<PatientDetails | null>(null)
+  const [isLoading, setisLoading] = useState(true)
+  const [error, setError] = useState<string | null> (null)
+
+  useEffect(() => {
+    const fetchPatientData = async () => {
+      try{
+        const patientRef = doc(db, 'patients', '1')
+        const patientSnap = await getDoc(patientRef)
+
+        if (patientSnap.exists()){
+          const data = patientSnap.data() as PatientDetails
+          setPatientData(patientSnap.data() as PatientDetails)
+        } else{
+          console.log("No patient document found")
+          setError("No patient data found")
+        }
+      } catch (err){
+        console.error("Error fetching patient data:", err)
+        setError("No patient data found")
+        console.error("Error fectching patient data:", err)
+      } finally{
+        setisLoading(false)
+      }
+    }
+    fetchPatientData()
+  }, [])
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-[#F8F4EB]">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    )
+  }
+
+  // Show error state
+  if (error || !patientData) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-[#F8F4EB]">
+        <Card className="p-6">
+          <CardTitle className="text-red-500">{error || "No data available"}</CardTitle>
+        </Card>
+      </div>
+    )
   }
 
   return (
@@ -26,13 +81,13 @@ export default function WhoAmIPage() {
         <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
           <CardHeader className="text-center">
             <Avatar className="h-32 w-32 mx-auto mb-4 ring-4 ring-primary/10">
-              <AvatarImage src={patientDetails.profilePicture} alt={patientDetails.name} />
+              <AvatarImage src={patientData.profilePicture} alt={patientData.name} />
               <AvatarFallback className="text-2xl">
-                {patientDetails.name.split(" ").map((n) => n[0]).join("")}
+                {patientData.name.split(" ").map((n) => n[0]).join("")}
               </AvatarFallback>
             </Avatar>
-            <CardTitle className="text-3xl font-bold text-gray-800">{patientDetails.name}</CardTitle>
-            <p className="text-lg text-muted-foreground">Age: {patientDetails.age}</p>
+            <CardTitle className="text-3xl font-bold text-gray-800">{patientData.name}</CardTitle>
+            <p className="text-lg text-muted-foreground">Age: {patientData.age}</p>
           </CardHeader>
         </Card>
 
@@ -46,13 +101,13 @@ export default function WhoAmIPage() {
               <h3 className="font-semibold text-gray-700 mb-2">Diagnosis</h3>
               <Badge variant="secondary" className="text-md px-4 py-1">
                 <IoCloudyNight className="mr-1 h-4 w-4 inline" />
-                {patientDetails.diagnosis}
+                {patientData.diagnosis}
               </Badge>
             </div>
             <div>
               <h3 className="font-semibold text-gray-700 mb-2">Medications</h3>
               <div className="flex flex-wrap gap-2">
-                {patientDetails.medications.map((med, index) => (
+                {patientData.medications.map((med, index) => (
                   <Badge key={index} variant="outline" className="text-md">
                     <IoCloudyNight className="mr-1 h-4 w-4 inline" />
                     {med}
@@ -63,7 +118,7 @@ export default function WhoAmIPage() {
             <div>
               <h3 className="font-semibold text-gray-700 mb-2">Allergies</h3>
               <div className="flex flex-wrap gap-2">
-                {patientDetails.allergies.map((allergy, index) => (
+                {patientData.allergies.map((allergy, index) => (
                   <Badge key={index} variant="destructive" className="text-md">
                     <IoCloudyNight className="mr-1 h-4 w-4 inline" />
                     {allergy}
@@ -82,7 +137,7 @@ export default function WhoAmIPage() {
           <CardContent>
             <textarea
               className="text-black w-full h-32 p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary/50 focus:border-primary resize-none"
-              defaultValue={patientDetails.about}
+              defaultValue={patientData.about}
               placeholder="Tell us about yourself..."
             />
           </CardContent>
@@ -100,4 +155,3 @@ export default function WhoAmIPage() {
     </div>
   )
 }
-

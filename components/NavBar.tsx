@@ -7,6 +7,10 @@ import Image from "next/image"
 
 function NavBar() {
     const pathname = usePathname();
+
+    if (pathname === '/login') {
+      return null;
+  }
     console.log(pathname)
   return (
     <div>
@@ -32,6 +36,9 @@ function NavBar() {
                   </Link>
                   <Link href="/who-am-i" className={` text-xl hover:underline ${pathname === '/who-am-i' ? 'text-selectedtextcolor' : 'text-primary'}`}>
                     Who Am I
+                  </Link>
+                  <Link href="/login" className={` text-xl hover:underline ${pathname === '/login' ? 'text-selectedtextcolor' : 'text-primary'}`}>
+                    Logout
                   </Link>
 
                 </div>

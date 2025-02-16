@@ -37,7 +37,7 @@ export default function MemoriesPage() {
   return (
     <div className="min-h-screen bg-[#F8F4EB] px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <Tabs defaultValue="feed" className=" w-full space-y-8 mt-2">
+        <Tabs defaultValue="feed" className=" w-full space-y-8 mt-16">
           <TabsList className="w-full sm:w-auto bg-white/50 backdrop-blur-sm">
             <TabsTrigger 
               value="feed"
