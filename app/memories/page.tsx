@@ -2,50 +2,42 @@ import MemoryFeed from "@/components/MemoryFeed"
 import MemoryChat from "@/components/MemoryChat"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Masonry from "@/components/Mansory";
+import MemoryInput from "@/components/MemoryInput"
 
 export default function MemoriesPage() {
   const data = [
-    { id: 1, image: 'https://picsum.photos/id/10/200/300', height: 400 },
-    { id: 2, image: 'https://picsum.photos/id/14/200/300', height: 300 },
-    { id: 3, image: 'https://picsum.photos/id/15/200/300', height: 300 },
-    { id: 4, image: 'https://picsum.photos/id/16/200/300', height: 300 },
-    { id: 5, image: 'https://picsum.photos/id/17/200/300', height: 300 },
-    { id: 6, image: 'https://picsum.photos/id/19/200/300', height: 300 },
-    { id: 7, image: 'https://picsum.photos/id/37/200/300', height: 200 },
-    { id: 8, image: 'https://picsum.photos/id/39/200/300', height: 300 },
-    { id: 9, image: 'https://picsum.photos/id/85/200/300', height: 200 },
-    { id: 10, image: 'https://picsum.photos/id/103/200/300', height: 900 },
-    { id: 11, image: 'https://picsum.photos/id/10/200/300', height: 400 },
-    { id: 12, image: 'https://picsum.photos/id/14/200/300', height: 300 },
-    { id: 13, image: 'https://picsum.photos/id/15/200/300', height: 300 },
-    { id: 14, image: 'https://picsum.photos/id/16/200/300', height: 300 },
-    { id: 15, image: 'https://picsum.photos/id/17/200/300', height: 300 },
-    { id: 16, image: 'https://picsum.photos/id/19/200/300', height: 300 },
-    { id: 17, image: 'https://picsum.photos/id/37/200/300', height: 200 },
-    { id: 18, image: 'https://picsum.photos/id/39/200/300', height: 300 },
-    { id: 19, image: 'https://picsum.photos/id/85/200/300', height: 200 },
-    { id: 20, image: 'https://picsum.photos/id/103/200/300', height: 400 },
-    { id: 21, image: 'https://picsum.photos/id/10/200/300', height: 400 },
-    { id: 22, image: 'https://picsum.photos/id/14/200/300', height: 300 },
-    { id: 23, image: 'https://picsum.photos/id/15/200/300', height: 300 },
-    { id: 24, image: 'https://picsum.photos/id/16/200/300', height: 300 },
-    { id: 25, image: 'https://picsum.photos/id/17/200/300', height: 300 },
-    { id: 26, image: 'https://picsum.photos/id/19/200/300', height: 300 },
-    { id: 27, image: 'https://picsum.photos/id/37/200/300', height: 200 },
-    { id: 28, image: 'https://picsum.photos/id/39/200/300', height: 300 },
-    { id: 29, image: 'https://picsum.photos/id/85/200/300', height: 200 },
-    { id: 30, image: 'https://picsum.photos/id/103/200/300', height: 400 }
+    { id: 1, image: '/images/IMG_8182.jpg', height: 500, description:'Mary hanging out at the hotel with her cousins.', tag: "Daughter" },
+    { id: 2, image: '/images/IMG_8183.jpg', height: 400, description:'Playing games together!', tag: "Family"},
+    { id: 3, image: '/images/IMG_8184.jpg', height: 500, description:'Mary enjoying a snack!', tag: "Daughter" },
+    { id: 4, image: '/images/IMG_8185.jpg', height: 500, description:'Big sister doing little sister\'s hair.', tag: "Family"},
+    { id: 5, image: '/images/IMG_8186.jpg', height: 500, description:'We went to the amusement park and enjoyed laughing at the clowns!', tag: "Amusement Park"},
+    { id: 6, image: '/images/IMG_8187.jpg', height: 500, description:'Getting off the rides.', tag: "Amusement Park"},
+    { id: 7, image: '/images/IMG_8189.jpg', height: 400, description:'Mary having fun on the carousel!.', tag: "Amusement Park"},
+    { id: 8, image: '/images/IMG_8190.jpg', height: 500, description:'Dinner together.', tag: "Family"},
+    { id: 9, image: '/images/IMG_8191.jpg', height: 500, description:'John, Mary, Joe, and I on Mary and John\s wedding day.', tag: "Wedding"},
+    { id: 10, image: '/images/IMG_8192.jpg', height: 500, description:'Cutting the wedding cake at the reception. Yum!', tag: "Wedding"},
+    { id: 11, image: '/images/IMG_8193.jpg', height: 500, description:'Mary and John walking out of the church after the wedding ceremony.', tag: "Wedding"},
+    { id: 12, image: '/images/IMG_8194.jpg', height: 500, description:'Mary and John outside the church with Grandma Betty.', tag: "Wedding"},
+    { id: 13, image: '/images/IMG_8195.jpg', height: 500, description:'The bride and grrom share a kiss!', tag: "Wedding"},
+    { id: 14, image: '/images/Baby7.webp', height: 400, description:'Mama and baby are healthy! Jackie is glad that the labor is over and baby Emma is here safe.', tag: "Baby"},
+    { id: 15, image: '/images/Baby3.png', height: 500, description:'Jackie and her sister when Jackie started having contractions and checked into the hospital', tag: "Baby" },
+    { id: 16, image: '/images/Baby1.png', height: 400, description:'Emma is dressed, in her car seat, and ready to go home to meet the rest of the family.', tag: "Baby" },
+    { id: 17, image: '/images/Baby4.jpg', height: 500, description:'Emma resting after being cleaned and eating.', tag: "Baby"},
+    { id: 18, image: '/images/Baby5.webp', height: 500, description:'Aunt Margaret with Baby Emma, who is cozy in the blaket that I made for her.', tag: "Baby"},
+    { id: 29, image: '/images/Baby6.jpg', height: 400, description:'Big sister meeting baby sister for the first time!', tag: "Baby"},
+    { id: 20, image: '/images/Baby7.webp', height: 400, description:'First selfie with mom and Emma! So cute!', tag: "Baby"},
+
   ];
 
   // Split data into three parts
-  const recentMemories = data.slice(0, 10);
-  const pastMemories = data.slice(10, 20);
-  const oldMemories = data.slice(20, 30);
+  const recentMemories = data.slice(14, 20);
+  const pastMemories = data.slice(8,13);
+  const oldMemories = data.slice(0,8);
 
   return (
     <div className="min-h-screen bg-[#F8F4EB] px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <Tabs defaultValue="feed" className=" w-full space-y-8 mt-2">
+        <Tabs defaultValue="feed" className=" w-full space-y-8 mt-16">
           <TabsList className="w-full sm:w-auto bg-white/50 backdrop-blur-sm">
             <TabsTrigger 
               value="feed"
@@ -63,23 +55,29 @@ export default function MemoriesPage() {
           
           <TabsContent value="feed" className="mt-6 space-y-12">
             <div>
-              <h2 className="text-2xl font-semibold mb-6">Recent Memories</h2>
+              <h2 className="text-2xl font-semibold mb-6">Baby Emma is Born November 17, 2024</h2>
               <Masonry data={recentMemories} />
             </div>
 
             <div>
-              <h2 className="text-2xl font-semibold mb-6">Past Memories</h2>
+              <h2 className="text-2xl font-semibold mb-6">Mary and John's Wedding August 31, 1996</h2>
               <Masonry data={pastMemories} />
             </div>
 
             <div>
-              <h2 className="text-2xl font-semibold mb-6">Old Memories</h2>
+              <h2 className="text-2xl font-semibold mb-6">Family Vacation April 1984</h2>
               <Masonry data={oldMemories} />
             </div>
           </TabsContent>
           
           <TabsContent value="chat" className="mt-6">
-            <MemoryChat />
+            <div className="space-y-4">
+              <div className="p-4 bg-white rounded-lg shadow">
+                <h3 className="text-lg font-medium mb-4">Add New Memory</h3>
+                <MemoryInput />
+              </div>
+              <MemoryChat />
+            </div>
           </TabsContent>
         </Tabs>
       </div>

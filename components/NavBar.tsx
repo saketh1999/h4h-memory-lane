@@ -18,7 +18,7 @@ function NavBar() {
               <div className="text-lg container mx-auto flex justify-between items-center py-4">
                 <Link href="/" className="flex items-center">
                   <Image 
-                    src="/memoryLaneLogo.svg"
+                    src="/MemoryLaneLogo.svg"
                     alt="Memory Lane Logo"
                     width={200}
                     height={30}

@@ -1,3 +1,4 @@
+
 'use client'
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useTransition, a } from "@react-spring/web";
@@ -7,6 +8,7 @@ interface MasonryItem {
   id: string | number;
   height: number;
   image: string;
+  description:string;
 }
 
 interface GridItem extends MasonryItem {
@@ -24,6 +26,7 @@ function Masonry({ data }: MasonryProps) {
   const [columns, setColumns] = useState<number>(2);
   const [selectedItem, setSelectedItem] = useState<MasonryItem | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   useEffect(() => {
     const updateColumns = () => {
@@ -89,8 +92,22 @@ function Masonry({ data }: MasonryProps) {
   });
 
   const handleItemClick = (item: MasonryItem) => {
+    const index = data.findIndex((dataItem) => dataItem.id === item.id);
+    setCurrentIndex(index);
     setSelectedItem(item);
     setModalOpen(true);
+  };
+
+  const handleNextImage = () => {
+    const nextIndex = (currentIndex + 1) % data.length;
+    setCurrentIndex(nextIndex);
+    setSelectedItem(data[nextIndex]);
+  };
+
+  const handlePreviousImage = () => {
+    const previousIndex = (currentIndex - 1 + data.length) % data.length;
+    setCurrentIndex(previousIndex);
+    setSelectedItem(data[previousIndex]);
   };
 
   const handleCloseModal = () => {
@@ -136,14 +153,20 @@ function Masonry({ data }: MasonryProps) {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: '80%',
-          maxWidth: '1000px',
+          width: '60%',
+          maxWidth: '750px',
           bgcolor: 'background.paper',
           boxShadow: 24,
           p: 4,
           borderRadius: 2,
         }}>
-          <div className="flex gap-6">
+          <div className="relative flex gap-6">
+            <button
+              onClick={handlePreviousImage}
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 -ml-12 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100"
+            >
+              ←
+            </button>
             <div className="flex-1">
               {selectedItem && (
                 <img
@@ -153,12 +176,17 @@ function Masonry({ data }: MasonryProps) {
                 />
               )}
             </div>
-            <div className="flex-1">
-              <h2 className="text-2xl font-bold mb-4">Image Details</h2>
-              <p className="text-gray-600">
-                ID: {selectedItem?.id}
+            <div className="flex-1 flex items-center justify-center">
+              <p className="text-gray-600 text-lg">
+                {selectedItem?.description}
               </p>
             </div>
+            <button
+              onClick={handleNextImage}
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 -mr-12 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100"
+            >
+              →
+            </button>
           </div>
         </Box>
       </Modal>
@@ -167,3 +195,4 @@ function Masonry({ data }: MasonryProps) {
 }
 
 export default Masonry;
+

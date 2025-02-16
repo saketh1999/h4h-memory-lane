@@ -506,52 +506,52 @@ class App {
   ) {
     const defaultItems = [
       {
-        image: `https://picsum.photos/seed/1/800/600?grayscale`,
-        text: "Bridge",
+        image: `https://picsum.photos/id/610/200/300`,
+        text: "Beach Day",
       },
       {
-        image: `https://picsum.photos/seed/2/800/600?grayscale`,
-        text: "Desk Setup",
+        image: `https://picsum.photos/id/633/200/300`,
+        text: "Drawing",
       },
       {
-        image: `https://picsum.photos/seed/3/800/600?grayscale`,
-        text: "Waterfall",
+        image: `https://picsum.photos/id/579/200/300`,
+        text: "City",
       },
       {
-        image: `https://picsum.photos/seed/4/800/600?grayscale`,
-        text: "Strawberries",
+        image: `https://picsum.photos/id/129/300/200`,
+        text: "Love",
       },
       {
-        image: `https://picsum.photos/seed/5/800/600?grayscale`,
-        text: "Deep Diving",
+        image: `https://picsum.photos/id/127/200/300`,
+        text: "Nature Walk",
       },
       {
-        image: `https://picsum.photos/seed/16/800/600?grayscale`,
-        text: "Train Track",
+        image: `https://picsum.photos/id/64/200/300`,
+        text: "Mary",
       },
       {
-        image: `https://picsum.photos/seed/17/800/600?grayscale`,
-        text: "Santorini",
+        image: `https://picsum.photos/id/395/200/300`,
+        text: "High School Reunion",
       },
       {
-        image: `https://picsum.photos/seed/8/800/600?grayscale`,
-        text: "Blurry Lights",
+        image: `https://picsum.photos/id/385/200/300`,
+        text: "Coast",
       },
       {
-        image: `https://picsum.photos/seed/9/800/600?grayscale`,
-        text: "New York",
+        image: `https://picsum.photos/id/453/200/300`,
+        text: "Concert",
       },
       {
-        image: `https://picsum.photos/seed/10/800/600?grayscale`,
-        text: "Good Boy",
+        image: `https://picsum.photos/id/450/200/300`,
+        text: "Hike",
       },
       {
-        image: `https://picsum.photos/seed/21/800/600?grayscale`,
-        text: "Coastline",
+        image: `https://picsum.photos/id/513/200/300`,
+        text: "Husband",
       },
       {
-        image: `https://picsum.photos/seed/12/800/600?grayscale`,
-        text: "Palm Trees",
+        image: `https://picsum.photos/id/548/200/300`,
+        text: "Bonfire",
       },
     ];
     const galleryItems = items && items.length ? items : defaultItems;

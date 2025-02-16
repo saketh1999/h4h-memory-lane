@@ -1,22 +1,15 @@
 import { NextResponse } from "next/server"
-import { PineconeClient } from "@pinecone-database/pinecone"
-import { Configuration, OpenAIApi } from "openai-edge"
+import { Pinecone } from "@pinecone-database/pinecone"
+import { GoogleGenerativeAI } from "@google/generative-ai"
 
-const config = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!)
+
+const pinecone = new Pinecone({
+  apiKey: process.env.PINECONE_API_KEY!,
 })
-const openai = new OpenAIApi(config)
-
-const pinecone = new PineconeClient()
 
 export async function POST(req: Request) {
   const { title, description } = await req.json()
-
-  // Initialize Pinecone client
-  await pinecone.init({
-    environment: process.env.PINECONE_ENVIRONMENT!,
-    apiKey: process.env.PINECONE_API_KEY!,
-  })
 
   // Select Pinecone index
   const index = pinecone.Index(process.env.PINECONE_INDEX_NAME!)
@@ -25,32 +18,25 @@ export async function POST(req: Request) {
   const embedding = await getEmbedding(`${title} ${description}`)
 
   // Store the memory in Pinecone
-  await index.upsert({
-    upsertRequest: {
-      vectors: [
-        {
-          id: Date.now().toString(),
-          values: embedding,
-          metadata: {
-            title,
-            description,
-            text: `${title}: ${description}`,
-          },
-        },
-      ],
+  await index.upsert([
+    {
+      id: Date.now().toString(),
+      values: embedding,
+      metadata: {
+        title,
+        description,
+        text: `${title}: ${description}`,
+      },
     },
-  })
+  ])
 
   return NextResponse.json({ success: true })
 }
 
 async function getEmbedding(text: string) {
-  const response = await openai.createEmbedding({
-    model: "text-embedding-ada-002",
-    input: text,
-  })
-
-  const result = await response.json()
-  return result.data[0].embedding
+  const model = genAI.getGenerativeModel({ model: "embedding-001" })
+  const result = await model.embedContent(text)
+  const embedding = result.embedding.values
+  return embedding
 }
 
