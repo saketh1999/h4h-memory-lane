@@ -511,52 +511,40 @@ class App {
   ) {
     const defaultItems = [
       {
-        image: `https://picsum.photos/id/610/200/300`,
-        text: "Beach Day",
+        image: '/images/Grace.jpg',
+        text: "Grace (Sister)",
       },
       {
-        image: `https://picsum.photos/id/633/200/300`,
-        text: "Drawing",
+        image: '/images/Scarlett.jpg',
+        text: "Scarlett (Vanessa's Daughter)",
       },
       {
-        image: `https://picsum.photos/id/579/200/300`,
-        text: "City",
+        image: '/images/Christopher.jpg',
+        text: "Christopher (Brother)",
       },
       {
-        image: `https://picsum.photos/id/129/300/200`,
-        text: "Love",
+        image: '/images/Darwin.jpg',
+        text: "Darwin (Nephew)",
       },
       {
-        image: `https://picsum.photos/id/127/200/300`,
-        text: "Nature Walk",
+        image: '/images/Vanessa.jpg',
+        text: "Vanessa (Friend)",
       },
       {
-        image: `https://picsum.photos/id/64/200/300`,
-        text: "Mary",
+        image: '/images/papa.jpg',
+        text: "Ollie (Papa)",
       },
       {
-        image: `https://picsum.photos/id/395/200/300`,
-        text: "High School Reunion",
+        image: '/images/Kara.jpg',
+        text: "Kara (Cousin)",
       },
       {
-        image: `https://picsum.photos/id/385/200/300`,
-        text: "Coast",
+        image: '/images/husband.jpg',
+        text: "John (Husband)",
       },
       {
-        image: `https://picsum.photos/id/453/200/300`,
-        text: "Concert",
-      },
-      {
-        image: `https://picsum.photos/id/450/200/300`,
-        text: "Hike",
-      },
-      {
-        image: `https://picsum.photos/id/513/200/300`,
-        text: "Husband",
-      },
-      {
-        image: `https://picsum.photos/id/548/200/300`,
-        text: "Bonfire",
+        image: '/images/Esther.jpg',
+        text: "Esther (Niece)",
       },
     ];
     const galleryItems = items && items.length ? items : defaultItems;
