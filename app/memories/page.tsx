@@ -2,6 +2,7 @@ import MemoryFeed from "@/components/MemoryFeed"
 import MemoryChat from "@/components/MemoryChat"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Masonry from "@/components/Mansory";
+import MemoryInput from "@/components/MemoryInput"
 
 export default function MemoriesPage() {
   const data = [
@@ -77,7 +78,13 @@ export default function MemoriesPage() {
           </TabsContent>
           
           <TabsContent value="chat" className="mt-6">
-            <MemoryChat />
+            <div className="space-y-4">
+              <div className="p-4 bg-white rounded-lg shadow">
+                <h3 className="text-lg font-medium mb-4">Add New Memory</h3>
+                <MemoryInput />
+              </div>
+              <MemoryChat />
+            </div>
           </TabsContent>
         </Tabs>
       </div>
