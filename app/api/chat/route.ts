@@ -1,47 +1,72 @@
-import { OpenAIStream, StreamingTextResponse } from "ai"
-import { Configuration, OpenAIApi } from "openai-edge"
+import { NextResponse } from "next/server";
+import { Pinecone } from "@pinecone-database/pinecone";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// Create an OpenAI API client (that's edge friendly!)
-const config = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-})
-const openai = new OpenAIApi(config)
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
+const pinecone = new Pinecone({
+  apiKey: process.env.PINECONE_API_KEY!,
+});
 
 export async function POST(req: Request) {
-  const { messages } = await req.json()
+  try {
+    const { query, messages } = await req.json();
+    const index = pinecone.Index(process.env.PINECONE_INDEX_NAME!);
 
-  // TODO: Implement Pinecone query for relevant memories
-  // For now, we'll use dummy data
-  const relevantMemories = `
-    1. Family Picnic: We had a wonderful picnic in Central Park last summer on July 15, 2022.
-    2. Wedding Anniversary: Celebrated our 50th wedding anniversary with close friends and family on March 22, 2023.
-    3. Grandchild's Birth: Welcoming our first grandchild, little Emma, into the world on January 10, 2023.
-  `
+    // Get embedding for the query
+    const model = genAI.getGenerativeModel({ model: "embedding-001" });
+    const embeddingResult = await model.embedContent(query);
+    const queryEmbedding = embeddingResult.embedding.values;
 
-  // Prepare the messages for OpenAI, including the relevant memories
-  const aiMessages = [
-    {
-      role: "system",
-      content:
-        "You are a helpful assistant for Alzheimer's patients. Use the provided memories to help answer questions.",
-    },
-    {
-      role: "user",
-      content: `Relevant memories: ${relevantMemories}\n\nUser question: ${messages[messages.length - 1].content}`,
-    },
-  ]
+    // Query Pinecone
+    const queryResponse = await index.query({
+      vector: queryEmbedding,
+      topK: 5, // Increased to get more context
+      includeMetadata: true,
+    });
 
-  // Ask OpenAI for a streaming chat completion given the prompt
-  const response = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
-    stream: true,
-    messages: aiMessages,
-  })
+    // Extract and format relevant contexts
+    const contexts = queryResponse.matches
+      ?.map((match) => match.metadata?.text as string)
+      .filter(Boolean);
 
-  // Convert the response into a friendly text-stream
-  const stream = OpenAIStream(response)
+    // Format the conversation history for Gemini
+    const formattedMessages = messages.map((msg: any) => ({
+      role: msg.role === 'user' ? 'user' : 'model',
+      parts: [{ text: msg.content }],
+    }));
 
-  // Respond with the stream
-  return new StreamingTextResponse(stream)
+    // Create chat model and start conversation
+    const chatModel = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const chat = chatModel.startChat({
+      history: formattedMessages,
+      generationConfig: {
+        temperature: 0.7,
+        topK: 40,
+        topP: 0.95,
+        maxOutputTokens: 1024,
+      },
+    });
+
+    // Construct a clear prompt with context
+    const prompt = `You are a helpful AI assistant with access to the user's memories. 
+    
+Relevant memories for context:
+${contexts.map((context, i) => `${i + 1}. ${context}`).join('\n')}
+
+User question: ${query}
+
+Please provide a natural, conversational response. If the memories don't contain relevant information for the question, please acknowledge that and try to provide a helpful general response.`;
+
+    const result = await chat.sendMessage(prompt);
+    const response = await result.response.text();
+
+    return NextResponse.json({ response });
+  } catch (error: any) {
+    console.error('Error in chat endpoint:', error);
+    return NextResponse.json(
+      { error: error.message || 'Failed to process chat request' },
+      { status: 500 }
+    );
+  }
 }
 
