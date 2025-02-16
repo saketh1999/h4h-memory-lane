@@ -5,39 +5,32 @@ import Masonry from "@/components/Mansory";
 
 export default function MemoriesPage() {
   const data = [
-    { id: 1, image: '/images/IMG_8182.jpg', height: 600 },
-    { id: 2, image: '/images/IMG_8183.jpg', height: 500 },
-    { id: 3, image: '/images/IMG_8184.jpg', height: 700 },
-    { id: 4, image: '/images/IMG_8185.jpg', height: 500 },
-    { id: 5, image: '/images/IMG_8186.jpg', height: 700 },
-    { id: 6, image: '/images/IMG_8187.jpg', height: 500 },
-    { id: 7, image: '/images/IMG_8189.jpg', height: 500 },
-    { id: 8, image: '/images/IMG_8190.jpg', height: 600 },
-    { id: 9, image: '/images/IMG_8191.jpg', height: 600 },
-    { id: 10, image: '/images/IMG_8192.jpg', height: 600 },
-    { id: 11, image: '/images/IMG_8193.jpg', height: 600 },
-    { id: 12, image: '/images/IMG_8194.jpg', height: 600 },
-    { id: 13, image: '/images/IMG_8195.jpg', height: 400 },
-    { id: 14, image: '/images/Baby7.webp', height: 600 },
-    { id: 15, image: '/images/Baby3.png', height: 600 },
-    { id: 16, image: '/images/Baby1.png', height: 500 },
-    { id: 17, image: '/images/Baby4.jpg', height: 600 },
-    { id: 18, image: '/images/Baby5.webp', height: 600 },
-    { id: 29, image: '/images/Baby6.jpg', height: 400 },
-    { id: 20, image: '/images/Baby7.webp', height: 400 },
-    { id: 21, image: 'https://picsum.photos/id/15/200/300', height: 300 },
-    { id: 22, image: 'https://picsum.photos/id/16/200/300', height: 300 },
-    { id: 23, image: 'https://picsum.photos/id/17/200/300', height: 300 },
-    { id: 24, image: 'https://picsum.photos/id/19/200/300', height: 300 },
-    { id: 25, image: 'https://picsum.photos/id/37/200/300', height: 200 },
-    { id: 26, image: 'https://picsum.photos/id/39/200/300', height: 300 },
-    { id: 27, image: 'https://picsum.photos/id/85/200/300', height: 200 },
-    { id: 28, image: 'https://picsum.photos/id/103/200/300', height: 400 }
+    { id: 1, image: '/images/IMG_8182.jpg', height: 500, description:'Mary hanging out at the hotel with her cousins.' },
+    { id: 2, image: '/images/IMG_8183.jpg', height: 400, description:'Playing games together!'},
+    { id: 3, image: '/images/IMG_8184.jpg', height: 500, description:'Mary enjoying a snack!' },
+    { id: 4, image: '/images/IMG_8185.jpg', height: 500, description:'Big sister doing little sister\'s hair.'},
+    { id: 5, image: '/images/IMG_8186.jpg', height: 500, description:'We went to the amusement park and enjoyed laughing at the clowns!'},
+    { id: 6, image: '/images/IMG_8187.jpg', height: 500, description:'Getting off the rides.'},
+    { id: 7, image: '/images/IMG_8189.jpg', height: 400, description:'Mary having fun on the carousel!.'},
+    { id: 8, image: '/images/IMG_8190.jpg', height: 500, description:'Dinner together.'},
+    { id: 9, image: '/images/IMG_8191.jpg', height: 500, description:'John, Mary, Joe, and I on Mary and John\s wedding day.'},
+    { id: 10, image: '/images/IMG_8192.jpg', height: 500, description:'Cutting the wedding cake at the reception. Yum!'},
+    { id: 11, image: '/images/IMG_8193.jpg', height: 500, description:'Mary and John walking out of the church after the wedding ceremony.'},
+    { id: 12, image: '/images/IMG_8194.jpg', height: 500, description:'Mary and John outside the church with Grandma Betty.'},
+    { id: 13, image: '/images/IMG_8195.jpg', height: 500, description:'The bride and grrom share a kiss!.'},
+    { id: 14, image: '/images/Baby7.webp', height: 400, description:'Mama and baby are healthy! Jackie is glad that the labor is over and baby Emma is here safe.'},
+    { id: 15, image: '/images/Baby3.png', height: 500, description:'Jackie and her sister when Jackie started having contractions and checked into the hospital' },
+    { id: 16, image: '/images/Baby1.png', height: 400, description:'Emma is dressed, in her car seat, and ready to go home to meet the rest of the family.' },
+    { id: 17, image: '/images/Baby4.jpg', height: 500, description:'Emma resting after being cleaned and eating.'},
+    { id: 18, image: '/images/Baby5.webp', height: 500, description:'Aunt Margaret with Baby Emma, who is cozy in the blaket that I made for her.'},
+    { id: 29, image: '/images/Baby6.jpg', height: 400, description:'Big sister meeting baby sister for the first time!'},
+    { id: 20, image: '/images/Baby7.webp', height: 400, description:'First selfie with mom and Emma! So cute!'},
+
   ];
 
   // Split data into three parts
   const recentMemories = data.slice(14, 20);
-  const pastMemories = data.slice(9,13);
+  const pastMemories = data.slice(8,13);
   const oldMemories = data.slice(0,8);
 
   return (
