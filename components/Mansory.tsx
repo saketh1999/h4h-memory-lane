@@ -2,12 +2,14 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useTransition, a } from "@react-spring/web";
 import { Modal, Box } from '@mui/material';
+import { Badge } from "@/components/ui/badge"
 
 interface MasonryItem {
   id: string | number;
   height: number;
   image: string;
   description:string;
+  tag: string;
 }
 
 interface GridItem extends MasonryItem {
@@ -157,7 +159,8 @@ function Masonry({ data }: MasonryProps) {
             <div className="flex-1">
               <h2 className="text-2xl font-bold mb-4">Image Details</h2>
               <p className="text-gray-600">
-                About: {selectedItem?.description}
+                About: {selectedItem?.description}<br></br>
+                {selectedItem?.tag && (<>Main Tag: <Badge>{selectedItem.tag}</Badge></>)}
               </p>
             </div>
           </div>
