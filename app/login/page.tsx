@@ -21,11 +21,11 @@ const LoginPage = () => {
   const router = useRouter();
 
   const handleLogin = () => {
-    router.push("/");
+    router.push("/home");
   };
 
   return (
-    <>
+    <div className = "absolute inset-0 min-h-screen w-full bg-background">
       <Container maxWidth="xs">
         <CssBaseline />
         <Box
@@ -84,7 +84,8 @@ const LoginPage = () => {
           </Box>
         </Box>
       </Container>
-    </>
+    </div>
+    
   );
 };
 export default LoginPage;
