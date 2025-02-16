@@ -71,7 +71,6 @@ export default function Memories() {
           </CardContent>
         </Card>
       ))}
-      <Button className="w-full">Load More Memories</Button>
     </div>
   )
 }
