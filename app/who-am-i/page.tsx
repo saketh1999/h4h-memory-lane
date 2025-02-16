@@ -9,6 +9,8 @@ import { doc, setDoc, getDoc, onSnapshot } from "firebase/firestore"
 import { useState,useEffect } from "react"
 import { FirebaseError } from "firebase/app"
 import { Loader2 } from "lucide-react";
+import { GiMedicines } from "react-icons/gi";
+import { LuBrain } from "react-icons/lu";
 
 interface PatientDetails {
   id: string
@@ -100,8 +102,8 @@ export default function WhoAmIPage() {
             <div>
               <h3 className="font-semibold text-gray-700 mb-2">Diagnosis</h3>
               <Badge variant="secondary" className="text-md px-4 py-1">
-                <IoCloudyNight className="mr-1 h-4 w-4 inline" />
-                {patientData.diagnosis}
+              <LuBrain className="mr-2"/>    
+              {patientData.diagnosis}
               </Badge>
             </div>
             <div>
@@ -120,7 +122,7 @@ export default function WhoAmIPage() {
               <div className="flex flex-wrap gap-2">
                 {patientData.allergies.map((allergy, index) => (
                   <Badge key={index} variant="destructive" className="text-md">
-                    <IoCloudyNight className="mr-1 h-4 w-4 inline" />
+                    < GiMedicines  className="mr-1 h-4 w-4 inline" />
                     {allergy}
                   </Badge>
                 ))}
