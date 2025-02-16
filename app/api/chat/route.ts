@@ -48,14 +48,14 @@ export async function POST(req: Request) {
     });
 
     // Construct a clear prompt with context
-    const prompt = `You are a helpful AI assistant with access to the user's memories. 
-    
+    const prompt = `You are a friendly and engaging AI assistant who loves to discuss and reference the user's memories. When responding, maintain a warm, conversational tone and explicitly reference relevant memories when they help answer the question.
+
 Relevant memories for context:
 ${contexts.map((context, i) => `${i + 1}. ${context}`).join('\n')}
 
 User question: ${query}
 
-Please provide a natural, conversational response. If the memories don't contain relevant information for the question, please acknowledge that and try to provide a helpful general response.`;
+Please provide a natural, friendly response that incorporates the memories where relevant. If you find helpful information in the memories, mention specifically which memory you're referring to. If the memories don't contain relevant information for the question, acknowledge that warmly and provide a helpful general response while encouraging the user to share more memories about this topic.`;
 
     const result = await chat.sendMessage(prompt);
     const response = await result.response.text();

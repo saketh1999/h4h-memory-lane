@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState } from 'react';
@@ -6,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { PiSparkle } from "react-icons/pi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import ReactMarkdown from 'react-markdown';
+
 interface Message {
   role: 'user' | 'assistant';
   content: string;
@@ -63,22 +64,24 @@ export default function MemoryChat() {
           >
             {message.role === 'assistant' ? (
               <div className='flex items-center gap-2'>
-              <PiSparkle className="w-5 h-5 mt-1 text-purple-500" />
-              <div>{message.content}</div>
+                <PiSparkle className="w-5 h-5 mt-1 text-purple-500" />
+                <div className="prose prose-sm">
+                  <ReactMarkdown>{message.content}</ReactMarkdown>
+                </div>
               </div>
             ) : (
               <div className='flex gap-2 '>
-                <div>{message.content}</div>
-              <Avatar className="w-8 h-8 ">
-                <AvatarImage src='/jane_doe.jpg' alt="JD" />
-                <AvatarFallback className="text-xs">
-                  JD
-                </AvatarFallback>
-              </Avatar>
-              
+                <div className="prose prose-sm">
+                  <ReactMarkdown>{message.content}</ReactMarkdown>
+                </div>
+                <Avatar className="w-8 h-8 ">
+                  <AvatarImage src='/jane_doe.jpg' alt="JD" />
+                  <AvatarFallback className="text-xs">
+                    JD
+                  </AvatarFallback>
+                </Avatar>
               </div>
             )}
-            
           </div>
         ))}
       </div>
