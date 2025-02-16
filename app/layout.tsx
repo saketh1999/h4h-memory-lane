@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className={inter.className} bg-background min-h-screen>
           <div className="min-h-screen bg-background">
             <NavBar></NavBar>
-            <main className="min-h-screen bg-background">{children}</main>
+            <main className="min-h-screen bg-background mt-24">{children}</main>
           </div>
       </body>
     </html>
